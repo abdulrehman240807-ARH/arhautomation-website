@@ -2,6 +2,7 @@
 import '../styles/global.css'
 import Nav from '../components/Nav.astro'
 import Footer from '../components/Footer.astro'
+import { BRAND } from '../consts'
 
 interface Props {
   title?: string
@@ -9,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'ARH Automation — AI Automation Developer | n8n | AI Agents | CRM & API Integration',
-  description = 'We build AI automations that keep running after the demo — n8n systems, AI agents, CRM & API integration with validation, retries and error handling. Book a free audit call.'
+  title = BRAND.description,
+  description = BRAND.description
 } = Astro.props
 
 const canonical = new URL(Astro.url.pathname, Astro.site)

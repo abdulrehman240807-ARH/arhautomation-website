@@ -1,5 +1,6 @@
 export const BRAND = {
   name: 'ARH Automation',
+  description: 'ARH Automation — AI automation architect',
   founder: 'Abdul Rehman Haris',
   domain: 'https://arhautomation.com',
   email: 'contact@arhautomation.com',
