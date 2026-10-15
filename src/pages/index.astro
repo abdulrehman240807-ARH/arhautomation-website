@@ -88,7 +88,7 @@ const howWeBuild = [
 // Teaser shows cases 01, 02 and 04
 const allCases = await getCollection('work')
 const teasers = ['doctor-data-engine', 'crm-autopilot-parent-reports', 'structured-intake-chatbot']
-  .map((slug) => allCases.find((c) => c.slug === slug)!)
+  .map((slug) => allCases.find((c) => c.id === slug)!)
   .filter(Boolean)
 ---
 
@@ -280,7 +280,7 @@ const teasers = ['doctor-data-engine', 'crm-autopilot-parent-reports', 'structur
       />
       <div class="mt-12 grid gap-5 lg:grid-cols-3">
         {teasers.map((entry, i) => (
-          <a href={`/work/${entry.slug}`} class="block">
+          <a href={`/work/${entry.id}`} class="block">
             <article class="hairline reveal group h-full rounded-xl p-6 transition-colors hover:border-violet/40 sm:p-7" style={`transition-delay:${i * 100}ms`}>
               <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">{entry.data.kicker}</span>
               <h3 class="mt-5 font-display text-lg font-bold leading-snug transition-colors group-hover:text-volt">{entry.data.title}</h3>

@@ -6,7 +6,7 @@ import { BRAND } from '../../consts'
 export async function getStaticPaths() {
   const cases = await getCollection('work')
   return cases.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry }
   }))
 }
