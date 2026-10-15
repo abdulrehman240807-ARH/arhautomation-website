@@ -19,7 +19,22 @@ const { entry } = Astro.props
 const { Content } = await render(entry)
 ---
 
-<Base title={`${entry.data.title} — Case File — ARH Automation`} description={entry.data.description}>
+<Base
+  title={`${entry.data.title} — Case File — ARH Automation`}
+  description={entry.data.description}
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: entry.data.title,
+    description: entry.data.description,
+    author: {
+      '@type': 'Organization',
+      name: 'ARH Automation'
+    },
+    url: new URL(`/work/${entry.id}`, Astro.site).href,
+    keywords: entry.data.stack.join(', ')
+  }}
+>
   <section class="relative overflow-hidden">
     <div class="grid-bg absolute inset-0" aria-hidden="true"></div>
 

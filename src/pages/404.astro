@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro'
+---
+
+<Base title="404 — Page not found | ARH Automation" description="The page you're looking for doesn't exist. Return to the home page or explore our case files.">
+  <section class="relative min-h-[calc(100vh-4rem)] overflow-hidden">
+    <div class="grid-bg absolute inset-0" aria-hidden="true"></div>
+    <div class="violet-glow -top-40 left-1/2 -translate-x-1/2 opacity-50" aria-hidden="true"></div>
+
+    <div class="relative mx-auto flex max-w-3xl flex-col items-center justify-center px-5 py-24 text-center sm:px-8">
+      <div class="reveal">
+        <p class="font-mono text-[12px] uppercase tracking-[0.24em] text-volt">Error 404</p>
+        <h1 class="mt-6 font-display text-6xl font-bold tracking-tight sm:text-8xl">
+          <span class="text-volt">4</span>
+          <span class="text-[var(--text-muted)]">0</span>
+          <span class="text-volt">4</span>
+        </h1>
+        <p class="mt-8 font-display text-xl font-semibold tracking-tight sm:text-2xl">
+          Page not found
+        </p>
+        <p class="mx-auto mt-4 max-w-md text-base leading-relaxed text-[var(--text-muted)]">
+          The page you're looking for doesn't exist or has been moved.
+          Return to the home page or explore our case files.
+        </p>
+
+        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="/"
+            class="volt-glow w-full rounded-full bg-volt px-7 py-3.5 text-center font-mono text-sm font-semibold text-[#06090c] transition-transform hover:scale-[1.03] active:scale-95 sm:w-auto"
+          >
+            ← Back to home
+          </a>
+          <a
+            href="/work"
+            class="w-full rounded-full border border-[var(--border-strong)] px-7 py-3.5 text-center font-mono text-sm text-[var(--text)] transition-colors hover:border-volt hover:text-volt sm:w-auto"
+          >
+            View case files
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

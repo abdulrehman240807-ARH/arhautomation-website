@@ -7,14 +7,56 @@ import { BRAND } from '../consts'
 interface Props {
   title?: string
   description?: string
+  jsonLd?: object | object[]
 }
 
 const {
   title = BRAND.description,
-  description = BRAND.description
+  description = BRAND.description,
+  jsonLd = null
 } = Astro.props
 
 const canonical = new URL(Astro.url.pathname, Astro.site)
+
+// Default structured data: Person + Organization
+const defaultJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: BRAND.founder,
+    jobTitle: 'AI automation architect',
+    worksFor: {
+      '@type': 'Organization',
+      name: BRAND.name
+    },
+    url: BRAND.domain,
+    email: BRAND.email,
+    sameAs: [
+      BRAND.links.linkedin,
+      BRAND.links.upwork,
+      BRAND.links.contra
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: BRAND.name,
+    description: 'AI automation architect. We engineer n8n systems, AI agents and CRM/API integrations with validation, retries and error handling.',
+    url: BRAND.domain,
+    email: BRAND.email,
+    founder: {
+      '@type': 'Person',
+      name: BRAND.founder
+    },
+    sameAs: [
+      BRAND.links.linkedin,
+      BRAND.links.upwork,
+      BRAND.links.contra
+    ]
+  }
+]
+
+const structuredData = jsonLd ? (Array.isArray(jsonLd) ? [...defaultJsonLd, ...jsonLd] : [...defaultJsonLd, jsonLd]) : defaultJsonLd
 ---
 
 <!doctype html>
@@ -49,6 +91,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="bg-[var(--bg)] text-[var(--text)] font-body antialiased">
     <Nav />

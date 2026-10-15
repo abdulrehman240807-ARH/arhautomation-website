@@ -100,9 +100,36 @@ body {
     transform: none;
     transition: none;
   }
+  .wire {
+    animation: none;
+  }
+  .canvas-node {
+    animation: none;
+  }
+  .status-dot::after {
+    animation: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
   html {
     scroll-behavior: auto;
   }
+}
+
+/* ---------------------------------- */
+/* Focus visible                      */
+/* ---------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--volt);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--volt);
+  outline-offset: 2px;
 }
 
 /* ---------------------------------- */

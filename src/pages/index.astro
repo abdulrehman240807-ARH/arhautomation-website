@@ -158,8 +158,8 @@ const teasers = ['doctor-data-engine', 'crm-autopilot-parent-reports', 'structur
           </div>
 
           <!-- canvas -->
-          <div class="relative h-56 overflow-hidden rounded-xl bg-[radial-gradient(circle_at_50%_50%,rgba(148,163,184,0.08),transparent_70%)] sm:h-64">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="none" viewBox="0 0 800 260" aria-hidden="true">
+          <div class="relative h-auto min-h-[14rem] overflow-hidden rounded-xl bg-[radial-gradient(circle_at_50%_50%,rgba(148,163,184,0.08),transparent_70%)] sm:h-64">
+            <svg class="absolute inset-0 hidden h-full w-full sm:block" preserveAspectRatio="none" viewBox="0 0 800 260" aria-hidden="true">
               <path class="wire" d="M185 130 C 235 130, 235 70, 285 70" />
               <path class="wire" d="M435 70 C 485 70, 485 130, 535 130" style="animation-delay:-0.4s" />
               <path class="wire" d="M665 130 C 700 130, 700 195, 665 195 L 285 195 C 240 195, 240 160, 185 160" style="animation-delay:-0.8s" />
@@ -171,26 +171,50 @@ const teasers = ['doctor-data-engine', 'crm-autopilot-parent-reports', 'structur
               </circle>
             </svg>
 
-            <!-- nodes -->
-            <div class="canvas-node absolute left-[3%] top-1/2 w-36 -translate-y-1/2 rounded-lg border border-volt/40 bg-[var(--panel)] p-3">
+            <!-- mobile: stacked nodes -->
+            <div class="flex flex-col gap-3 p-4 sm:hidden">
+              <div class="rounded-lg border border-volt/40 bg-[var(--panel)] p-3">
+                <p class="font-mono text-[10px] uppercase tracking-widest text-volt">trigger</p>
+                <p class="mt-1.5 font-display text-sm font-semibold">New Lead In</p>
+                <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">webhook · form</p>
+              </div>
+              <div class="rounded-lg border border-violet/40 bg-[var(--panel)] p-3">
+                <p class="font-mono text-[10px] uppercase tracking-widest text-violet">ai step</p>
+                <p class="mt-1.5 font-display text-sm font-semibold">AI Enrich</p>
+                <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">claude · validate</p>
+              </div>
+              <div class="rounded-lg border border-volt/40 bg-[var(--panel)] p-3">
+                <p class="font-mono text-[10px] uppercase tracking-widest text-volt">sync</p>
+                <p class="mt-1.5 font-display text-sm font-semibold">CRM Upsert</p>
+                <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">dedupe · highlevel</p>
+              </div>
+              <div class="rounded-lg border border-[var(--border-strong)] bg-[var(--panel)] p-3">
+                <p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">action</p>
+                <p class="mt-1.5 font-display text-sm font-semibold">Follow-up</p>
+                <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">sequence · whatsapp</p>
+              </div>
+            </div>
+
+            <!-- desktop: absolute positioned nodes -->
+            <div class="canvas-node absolute left-[3%] top-1/2 hidden w-36 -translate-y-1/2 rounded-lg border border-volt/40 bg-[var(--panel)] p-3 sm:block">
               <p class="font-mono text-[10px] uppercase tracking-widest text-volt">trigger</p>
               <p class="mt-1.5 font-display text-sm font-semibold">New Lead In</p>
               <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">webhook · form</p>
             </div>
 
-            <div class="canvas-node absolute left-[36%] top-[12%] w-36 rounded-lg border border-violet/40 bg-[var(--panel)] p-3" style="animation-delay:0.6s">
+            <div class="canvas-node absolute left-[36%] top-[12%] hidden w-36 rounded-lg border border-violet/40 bg-[var(--panel)] p-3 sm:block" style="animation-delay:0.6s">
               <p class="font-mono text-[10px] uppercase tracking-widest text-violet">ai step</p>
               <p class="mt-1.5 font-display text-sm font-semibold">AI Enrich</p>
               <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">claude · validate</p>
             </div>
 
-            <div class="canvas-node absolute right-[14%] top-1/2 w-36 -translate-y-1/2 rounded-lg border border-volt/40 bg-[var(--panel)] p-3" style="animation-delay:1.2s">
+            <div class="canvas-node absolute right-[14%] top-1/2 hidden w-36 -translate-y-1/2 rounded-lg border border-volt/40 bg-[var(--panel)] p-3 sm:block" style="animation-delay:1.2s">
               <p class="font-mono text-[10px] uppercase tracking-widest text-volt">sync</p>
               <p class="mt-1.5 font-display text-sm font-semibold">CRM Upsert</p>
               <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">dedupe · highlevel</p>
             </div>
 
-            <div class="canvas-node absolute bottom-[8%] left-[24%] w-36 rounded-lg border border-[var(--border-strong)] bg-[var(--panel)] p-3" style="animation-delay:1.8s">
+            <div class="canvas-node absolute bottom-[8%] left-[24%] hidden w-36 rounded-lg border border-[var(--border-strong)] bg-[var(--panel)] p-3 sm:block" style="animation-delay:1.8s">
               <p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">action</p>
               <p class="mt-1.5 font-display text-sm font-semibold">Follow-up</p>
               <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">sequence · whatsapp</p>
