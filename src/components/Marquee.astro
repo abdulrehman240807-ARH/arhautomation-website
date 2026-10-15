@@ -1,0 +1,23 @@
+---
+interface Props {
+  items: string[]
+}
+
+const { items } = Astro.props
+// Duplicate the list so the CSS translateX(-50%) loop is seamless.
+const doubled = [...items, ...items]
+---
+
+<div id="stack" class="marquee-wrap reveal relative overflow-hidden border-y border-[var(--border)] bg-[var(--bg-elevated)] py-5" aria-label="Tech stack">
+  <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[var(--bg-elevated)] to-transparent"></div>
+  <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[var(--bg-elevated)] to-transparent"></div>
+
+  <div class="marquee-track" aria-hidden="false">
+    {doubled.map((item, i) => (
+      <span class="flex items-center gap-8 whitespace-nowrap px-8 font-mono text-sm uppercase tracking-[0.18em] text-[var(--text-muted)]">
+        <span class={i % 2 === 0 ? '' : 'text-volt/80'}>{item}</span>
+        <span class="text-violet" aria-hidden="true">◆</span>
+      </span>
+    ))}
+  </div>
+</div>

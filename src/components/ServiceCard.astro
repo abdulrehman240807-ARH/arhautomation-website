@@ -1,0 +1,38 @@
+---
+interface Props {
+  index: string
+  title: string
+  description: string
+  bullets: string[]
+  tag: string
+}
+
+const { index, title, description, bullets, tag } = Astro.props
+---
+
+<article class="hairline reveal group relative overflow-hidden rounded-xl p-6 transition-colors duration-300 hover:border-[rgba(157,255,60,0.35)] sm:p-8">
+  <div class="pointer-events-none absolute -right-16 -top-16 size-40 rounded-full bg-[var(--volt-dim)] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"></div>
+
+  <div class="flex items-center justify-between">
+    <span class="font-mono text-xs tracking-[0.2em] text-volt">{index}</span>
+    <span class="rounded-full border border-[var(--border)] px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-[var(--text-muted)]">
+      {tag}
+    </span>
+  </div>
+
+  <h3 class="mt-5 font-display text-xl font-bold tracking-tight transition-colors group-hover:text-volt">
+    {title}
+  </h3>
+  <p class="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{description}</p>
+
+  <ul class="mt-6 space-y-2.5 border-t border-[var(--border)] pt-5">
+    {bullets.map((b) => (
+      <li class="flex items-start gap-2.5 text-sm text-[var(--text)]">
+        <svg class="mt-1 shrink-0 text-volt" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {b}
+      </li>
+    ))}
+  </ul>
+</article>
