@@ -1,87 +1,95 @@
 ---
+import { getCollection } from 'astro:content'
 import Base from '../layouts/Base.astro'
 import SectionHead from '../components/SectionHead.astro'
 import ServiceCard from '../components/ServiceCard.astro'
 import Marquee from '../components/Marquee.astro'
+import { BRAND } from '../consts'
 
 const services = [
   {
     index: '01',
-    title: 'Lead-Gen Machines',
+    title: 'Lead-Gen & Follow-Up Machines',
     description:
-      'Always-on pipelines that find, qualify and nurture prospects while you sleep — from scraping to signed deal.',
+      'Capture, dedupe, enrich, qualify, route and follow up — a revenue pipeline that runs whether or not anyone is at the desk.',
     bullets: [
-      'Prospect sourcing & enrichment (Apollo, Clay, LinkedIn)',
-      'Multi-channel outreach: email, LinkedIn, SMS',
-      'AI-personalised copy that passes the spam folder',
-      'Live CRM hygiene + auto lead scoring'
+      'Form / DM / webhook capture with input validation',
+      'Dedupe before anything is written — no double records',
+      'Enrichment + qualification scoring on every lead',
+      'Automatic routing and multi-step follow-up sequences'
     ],
     tag: 'Revenue'
   },
   {
     index: '02',
-    title: 'Ops Automation',
+    title: 'AI Agents & Chatbots',
     description:
-      'Glue your entire stack together with n8n / Make workflows so data flows without humans copy-pasting.',
+      'Claude and OpenAI agents built on structured outputs and tool calling — with a clean human handoff when it matters.',
     bullets: [
-      'Invoice, contract & document pipelines',
-      'Slack / Notion / HubSpot sync done right',
-      'Onboarding & reporting automated end-to-end',
-      'Error alerts + self-healing retry logic'
+      'Schema-constrained structured outputs, not free text',
+      'Tool calling into your CRM, calendar and data stores',
+      'Guardrails, validation and confidence thresholds',
+      'Human handoff wired in from day one'
     ],
-    tag: 'Efficiency'
+    tag: 'Intelligence'
   },
   {
     index: '03',
-    title: 'AI Agents',
+    title: 'CRM & Back-Office Automation',
     description:
-      'Custom LLM agents with your knowledge baked in — support, research and internal copilots that actually ship.',
+      'HighLevel, HubSpot and Sheets operated end-to-end — pipeline moves, tagging, bookings and reports handled by the system.',
     bullets: [
-      'RAG chatbots trained on your docs & tickets',
-      'Voice + WhatsApp / IG DM sales agents',
-      'Tool-calling agents (CRM, calendar, email)',
-      'Guardrails, evals and human-in-the-loop review'
+      'Pipeline stage moves and tagging rules that stay accurate',
+      'Booking flows and reminders across sub-accounts',
+      'End-of-day reports generated and delivered automatically',
+      'Data hygiene: merges, cleanses and audit trails'
     ],
-    tag: 'Intelligence'
+    tag: 'Operations'
+  },
+  {
+    index: '04',
+    title: 'API & Messaging Integration',
+    description:
+      'REST, webhooks, WhatsApp Business API and Telegram — including the platforms whose documentation reads like an afterthought.',
+    bullets: [
+      'Custom REST + webhook integrations with retry logic',
+      'WhatsApp Business API messaging flows',
+      'Telegram bots for alerts, digests and internal ops',
+      'Undocumented APIs reverse-engineered and wrapped properly'
+    ],
+    tag: 'Integration'
   }
 ]
 
 const stats = [
-  { value: '120+', label: 'Workflows shipped' },
-  { value: '9.4k', label: 'Hours saved / month' },
-  { value: '5x', label: 'Avg. reply-rate lift' },
-  { value: '99.98%', label: 'Fleet uptime' }
+  { value: '6+', label: 'Production systems live' },
+  { value: '2', label: 'Long-term engagements (HK · US)' },
+  { value: '5.0★', label: 'Upwork rating' },
+  { value: '0', label: 'Silent failures shipped' }
 ]
 
 const stack = [
-  'n8n', 'Make.com', 'OpenAI', 'Claude', 'LangChain', 'Airtable',
-  'HubSpot', 'GoHighLevel', 'Zapier', 'Supabase', 'Vapi', 'Retell AI',
-  'Clay', 'Apollo', 'Slack', 'Notion'
+  'n8n', 'Make.com', 'Claude', 'OpenAI', 'HighLevel', 'HubSpot',
+  'WhatsApp Business API', 'Telegram', 'Google Sheets', 'REST APIs',
+  'Webhooks', 'Airtable', 'Zapier', 'Supabase'
 ]
 
-const cases = [
-  {
-    client: 'SaaS Client · Upwork ★★★★★',
-    title: 'Inbound → booked demo in 47 seconds',
-    metric: '+312% demos booked',
-    blurb:
-      'Speed-to-lead agent that enriches every form fill, scores it and drops a personalised calendar link into the lead\u2019s inbox before a human even wakes up.'
-  },
-  {
-    client: 'Real Estate Group · Upwork ★★★★★',
-    title: 'Listing syndication + AI rebuttals',
-    metric: '18 hrs/week saved',
-    blurb:
-      'Scraped 4 portals nightly, normalised data into their CRM and auto-generated first-draft responses to every enquiry for agent review.'
-  },
-  {
-    client: 'E-com Brand · Upwork ★★★★★',
-    title: 'Support agent deflection engine',
-    metric: '68% ticket deflection',
-    blurb:
-      'RAG agent wired into Gorgias + Shopify order data, with confidence thresholds that escalate gracefully to humans.'
-  }
+const howWeBuild = [
+  'Input validation before anything is written',
+  'Duplicate & repeat-execution prevention',
+  'Human approval on anything that costs money or contacts a customer',
+  'Timeouts, retries and fallbacks on every external call',
+  'Dedicated error workflow — no silent failures',
+  'Auditable execution logs for every run',
+  'Edge-case testing before handover',
+  'Docs + Loom walkthrough at handover'
 ]
+
+// Teaser shows cases 01, 02 and 04
+const allCases = await getCollection('work')
+const teasers = ['doctor-data-engine', 'crm-autopilot-parent-reports', 'structured-intake-chatbot']
+  .map((slug) => allCases.find((c) => c.slug === slug)!)
+  .filter(Boolean)
 ---
 
 <Base>
@@ -94,31 +102,40 @@ const cases = [
       <div class="reveal mx-auto max-w-3xl text-center">
         <p class="mx-auto inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--panel)] px-4 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">
           <span class="status-dot relative inline-block size-1.5 rounded-full bg-volt" aria-hidden="true"></span>
-          AI Automation Agency — accepting builds
+          ARH Automation — AI automation agency
         </p>
 
         <h1 class="mt-7 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
-          Your business, wired<br />
-          like a <span class="text-volt">control room.</span>
+          We build AI automations that<br />
+          keep running <span class="text-volt">after the demo.</span>
         </h1>
 
         <p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg">
-          I design and ship AI automations — lead-gen machines, ops workflows and
-          autonomous agents — that run 24/7 so your team stops doing robot work.
+          n8n systems, AI agents, CRM &amp; API integration — engineered with
+          validation, retries and error handling that catch failures at 2am.
+          Not demo-day toys.
+        </p>
+
+        <p class="mx-auto mt-6 max-w-2xl border-l-2 border-volt/50 pl-4 text-left text-sm italic leading-relaxed text-[var(--text-muted)]">
+          Most automation looks fine in a clean test run. The problems start later —
+          an API times out at 2am, the same lead gets created twice, volume triples
+          and records go missing. We build for that day, not for demo day.
         </p>
 
         <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="#contact"
+            href={BRAND.booking}
+            target="_blank"
+            rel="noopener noreferrer"
             class="volt-glow w-full rounded-full bg-volt px-7 py-3.5 text-center font-mono text-sm font-semibold text-[#06090c] transition-transform hover:scale-[1.03] active:scale-95 sm:w-auto"
           >
-            Book a free audit →
+            Book a free audit call →
           </a>
           <a
-            href="#work"
+            href="/work"
             class="w-full rounded-full border border-[var(--border-strong)] px-7 py-3.5 text-center font-mono text-sm text-[var(--text)] transition-colors hover:border-volt hover:text-volt sm:w-auto"
           >
-            See recent builds
+            See the systems
           </a>
         </div>
       </div>
@@ -132,7 +149,7 @@ const cases = [
               <span class="size-2.5 rounded-full bg-[#ff5f57]"></span>
               <span class="size-2.5 rounded-full bg-[#febc2e]"></span>
               <span class="size-2.5 rounded-full bg-volt"></span>
-              <span class="ml-3 font-mono text-xs text-[var(--text-muted)]">workflow://lead-radar.main</span>
+              <span class="ml-3 font-mono text-xs text-[var(--text-muted)]">workflow://lead-machine.main</span>
             </div>
             <span class="inline-flex items-center gap-2 rounded-full border border-volt/30 bg-[var(--volt-dim)] px-3 py-1 font-mono text-[11px] text-volt">
               <span class="status-dot relative inline-block size-1.5 rounded-full bg-volt" aria-hidden="true"></span>
@@ -164,26 +181,26 @@ const cases = [
             <div class="canvas-node absolute left-[36%] top-[12%] w-36 rounded-lg border border-violet/40 bg-[var(--panel)] p-3" style="animation-delay:0.6s">
               <p class="font-mono text-[10px] uppercase tracking-widest text-violet">ai step</p>
               <p class="mt-1.5 font-display text-sm font-semibold">AI Enrich</p>
-              <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">gpt-4o · clay</p>
+              <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">claude · validate</p>
             </div>
 
             <div class="canvas-node absolute right-[14%] top-1/2 w-36 -translate-y-1/2 rounded-lg border border-volt/40 bg-[var(--panel)] p-3" style="animation-delay:1.2s">
               <p class="font-mono text-[10px] uppercase tracking-widest text-volt">sync</p>
               <p class="mt-1.5 font-display text-sm font-semibold">CRM Upsert</p>
-              <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">hubspot</p>
+              <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">dedupe · highlevel</p>
             </div>
 
             <div class="canvas-node absolute bottom-[8%] left-[24%] w-36 rounded-lg border border-[var(--border-strong)] bg-[var(--panel)] p-3" style="animation-delay:1.8s">
               <p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">action</p>
               <p class="mt-1.5 font-display text-sm font-semibold">Follow-up</p>
-              <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">email seq · dm</p>
+              <p class="mt-1 font-mono text-[10px] text-[var(--text-muted)]">sequence · whatsapp</p>
             </div>
           </div>
 
           <!-- console strip -->
           <div class="mt-3 flex items-center gap-3 overflow-hidden rounded-lg border border-[var(--border)] bg-[#04070a] px-3 py-2 font-mono text-[11px] text-[var(--text-muted)]">
             <span class="shrink-0 text-volt">✓</span>
-            <span class="truncate">exec #4821 · lead enriched · scored 87/100 · pushed to CRM · sequence started</span>
+            <span class="truncate">exec #4821 · validated · deduped · enriched · logged · follow-up scheduled · 0 errors</span>
           </div>
         </div>
       </div>
@@ -209,38 +226,79 @@ const cases = [
   <section id="services" class="mx-auto max-w-6xl scroll-mt-24 px-5 pb-24 sm:px-8">
     <SectionHead
       kicker="Services"
-      title="Three machines we build for you"
-      description="Pick one or wire them together. Every build ships with monitoring, error alerts and handover docs."
+      title="Four systems we build and operate"
+      description="Pick one or wire them together. Every build ships with validation, error handling, monitoring and handover docs."
     />
-    <div class="mt-12 grid gap-5 md:grid-cols-3">
+    <div class="mt-12 grid gap-5 md:grid-cols-2">
       {services.map((s) => (
         <ServiceCard {...s} />
       ))}
     </div>
   </section>
 
-  <!-- ================= CASE STUDIES ================= -->
-  <section id="work" class="border-y border-[var(--border)] bg-[var(--bg-elevated)] py-24">
-    <div class="mx-auto max-w-6xl scroll-mt-24 px-5 sm:px-8">
+  <!-- ================= HOW WE BUILD ================= -->
+  <section class="mx-auto max-w-6xl px-5 pb-24 sm:px-8">
+    <SectionHead
+      kicker="How we build"
+      title="The engineering most automation shops skip."
+      description="These aren't extras. They're the difference between a workflow that demos well and one that survives production."
+    />
+    <div class="reveal mt-12 grid gap-px overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2">
+      {howWeBuild.map((rule, i) => (
+        <div class="flex items-start gap-4 bg-[var(--panel)] p-5 sm:p-6">
+          <span class="mt-0.5 font-mono text-xs tracking-[0.2em] text-volt">{String(i + 1).padStart(2, '0')}</span>
+          <p class="text-sm leading-relaxed text-[var(--text)]">{rule}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Agency OS strip -->
+    <div class="reveal mt-6 flex flex-col gap-4 rounded-xl border border-violet/30 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8" style="background:linear-gradient(90deg, rgba(124,92,255,0.08), rgba(157,255,60,0.05));">
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-violet">Agency OS</p>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--text)] sm:text-base">
+          We run our agency on our own systems — lead capture, enrichment, CRM,
+          automated follow-ups, daily digest. Every lead touched in under 60 seconds.
+        </p>
+      </div>
+      <a
+        href="/work/agency-os"
+        class="shrink-0 font-mono text-sm text-volt underline decoration-volt/40 underline-offset-4 transition-colors hover:decoration-volt"
+      >
+        Read the case file →
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= CASE STUDIES TEASER ================= -->
+  <section class="border-y border-[var(--border)] bg-[var(--bg-elevated)] py-24">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8">
       <SectionHead
         kicker="Case Files"
-        title="Recent builds, real numbers"
-        description="A sample from the fleet — delivered for Upwork clients across SaaS, real estate and e-commerce."
+        title="Systems in production, not slideware."
+        description="A sample from the fleet — delivered for clients in Hong Kong and the US, plus our own internal stack."
       />
       <div class="mt-12 grid gap-5 lg:grid-cols-3">
-        {cases.map((c, i) => (
-          <article class="hairline reveal group rounded-xl p-6 transition-colors hover:border-violet/40 sm:p-7" style={`transition-delay:${i * 100}ms`}>
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">{c.client}</span>
-              <span class="rounded-full bg-[var(--volt-dim)] px-2.5 py-1 font-mono text-[11px] font-semibold text-volt">{c.metric}</span>
-            </div>
-            <h3 class="mt-5 font-display text-lg font-bold leading-snug transition-colors group-hover:text-violet">{c.title}</h3>
-            <p class="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{c.blurb}</p>
-            <p class="mt-6 inline-flex items-center gap-2 font-mono text-xs text-volt opacity-0 transition-opacity group-hover:opacity-100">
-              Read case file →
-            </p>
-          </article>
+        {teasers.map((entry, i) => (
+          <a href={`/work/${entry.slug}`} class="block">
+            <article class="hairline reveal group h-full rounded-xl p-6 transition-colors hover:border-violet/40 sm:p-7" style={`transition-delay:${i * 100}ms`}>
+              <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">{entry.data.kicker}</span>
+              <h3 class="mt-5 font-display text-lg font-bold leading-snug transition-colors group-hover:text-volt">{entry.data.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{entry.data.description}</p>
+              <p class="mt-6 inline-flex items-center gap-2 font-mono text-xs text-volt opacity-0 transition-opacity group-hover:opacity-100">
+                Read case file →
+              </p>
+            </article>
+          </a>
         ))}
+      </div>
+      <div class="reveal mt-10 text-center">
+        <a
+          href="/work"
+          class="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] px-6 py-3 font-mono text-sm text-[var(--text)] transition-colors hover:border-volt hover:text-volt"
+        >
+          All 5 case files →
+        </a>
       </div>
     </div>
   </section>
@@ -252,30 +310,30 @@ const cases = [
       <div class="reveal hairline rounded-2xl p-10 shadow-[0_0_100px_-30px_rgba(157,255,60,0.25)] sm:p-14">
         <p class="font-mono text-[12px] uppercase tracking-[0.24em] text-volt">Free 30-min audit</p>
         <h2 class="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
-          Find the automation<br class="hidden sm:block" /> your business is missing.
+          Bring us the process<br class="hidden sm:block" /> that keeps breaking.
         </h2>
         <p class="mx-auto mt-4 max-w-md text-sm leading-relaxed text-[var(--text-muted)] sm:text-base">
-          Bring one messy process to the call. You leave with a mapped workflow,
-          tool recommendations and an ROI estimate — no strings attached.
+          On the call we map the workflow, find where it fails silently, and give
+          you a concrete build plan — whether or not you work with us.
         </p>
         <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="https://cal.com/voltops/audit"
+            href={BRAND.booking}
             target="_blank"
             rel="noopener noreferrer"
             class="volt-glow w-full rounded-full bg-volt px-8 py-3.5 font-mono text-sm font-semibold text-[#06090c] transition-transform hover:scale-[1.03] active:scale-95 sm:w-auto"
           >
-            Book my free audit call
+            Book a free audit call
           </a>
           <a
-            href="mailto:hello@voltops.ai"
+            href={`mailto:${BRAND.email}`}
             class="font-mono text-sm text-[var(--text-muted)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:text-volt"
           >
-            hello@voltops.ai
+            {BRAND.email}
           </a>
         </div>
         <p class="mt-6 font-mono text-[11px] text-[var(--text-muted)]">
-          ⚡ Avg. response time: 4h · 📅 2 build slots left this month
+          Founder: Abdul Rehman Haris · Replies within one business day
         </p>
       </div>
     </div>

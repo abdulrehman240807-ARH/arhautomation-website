@@ -1,11 +1,13 @@
 ---
+import { BRAND } from '../consts'
+
 const year = new Date().getFullYear()
 
 const socials = [
-  { label: 'X / Twitter', href: 'https://x.com/voltops' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/company/voltops' },
-  { label: 'Upwork', href: 'https://www.upwork.com/freelancers/~voltops' },
-  { label: 'GitHub', href: 'https://github.com/voltops' }
+  { label: 'Contra', href: BRAND.links.contra },
+  { label: 'Upwork', href: BRAND.links.upwork },
+  { label: 'LinkedIn', href: BRAND.links.linkedin },
+  { label: BRAND.email, href: `mailto:${BRAND.email}` }
 ]
 ---
 
@@ -14,15 +16,15 @@ const socials = [
     <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
       <div class="max-w-sm">
         <p class="font-display text-lg font-bold">
-          Voltops<span class="text-volt">.</span>
+          ARH Automation<span class="text-volt">.</span>
         </p>
         <p class="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">
-          AI automation agency. We design and ship workflows, agents and integrations
-          that quietly run the boring parts of your business.
+          AI automation agency. We engineer n8n systems, AI agents and CRM/API
+          integrations with the failure handling most builders skip.
         </p>
         <p class="mt-5 inline-flex items-center gap-2.5 rounded-full border border-[var(--border)] bg-[var(--panel)] px-3.5 py-1.5 font-mono text-xs text-[var(--text-muted)]">
           <span class="status-dot relative inline-block size-2 rounded-full bg-volt" aria-hidden="true"></span>
-          systems running — 99.98% uptime
+          systems running — our own automations keep this agency online
         </p>
       </div>
 
@@ -42,7 +44,7 @@ const socials = [
     </div>
 
     <div class="mt-12 flex flex-col gap-3 border-t border-[var(--border)] pt-6 font-mono text-xs text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
-      <span>© {year} Voltops. All systems nominal.</span>
+      <span>© {year} ARH Automation — Abdul Rehman Haris. This site runs on our own automation stack.</span>
       <span>Built with Astro · Tailwind v4 · shipped from the control room</span>
     </div>
   </div>

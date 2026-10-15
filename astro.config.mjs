@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
+import mdx from '@astrojs/mdx'
 import tailwindcss from '@tailwindcss/vite'
 
 /**
@@ -18,8 +19,8 @@ const allowAnyHost = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://voltops.ai',
-  integrations: [sitemap()],
+  site: 'https://arhautomation.com',
+  integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss(), allowAnyHost],
     server: {

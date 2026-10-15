@@ -1,9 +1,11 @@
 ---
+import { BRAND } from '../consts'
+
 const links = [
-  { href: '#services', label: 'Services' },
-  { href: '#work', label: 'Work' },
-  { href: '#stack', label: 'Stack' },
-  { href: '#contact', label: 'Contact' }
+  { href: '/#services', label: 'Services' },
+  { href: '/work', label: 'Work' },
+  { href: '/#stack', label: 'Stack' },
+  { href: '/#contact', label: 'Contact' }
 ]
 ---
 
@@ -18,7 +20,7 @@ const links = [
           <path d="M7 11l10-5M7 13l10 5" stroke="#8b98a7" stroke-width="1.2"/>
         </svg>
       </span>
-      <span>Voltops<span class="text-volt">.</span></span>
+      <span>ARH Automation<span class="text-volt">.</span></span>
     </a>
 
     <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -33,10 +35,12 @@ const links = [
     </nav>
 
     <a
-      href="#contact"
+      href={BRAND.booking}
+      target="_blank"
+      rel="noopener noreferrer"
       class="volt-glow inline-flex items-center gap-2 rounded-full bg-volt px-4 py-2 font-mono text-[13px] font-semibold text-[#06090c] transition-transform hover:scale-[1.03] active:scale-95"
     >
-      Book audit call
+      Book a free audit call
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://voltops.ai/sitemap-index.xml
+Sitemap: https://arhautomation.com/sitemap-index.xml
