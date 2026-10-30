@@ -1,5 +1,5 @@
 # ---- Build stage ----
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -20,7 +20,7 @@ COPY Caddyfile /etc/caddy/Caddyfile
 
 # Non-root: Caddy alpine image runs as caddy user by default
 # Ensure /data and /config dirs are writable
-RUN mkdir -p /data /config && chown -R caddy:caddy /data /config /srv
+RUN mkdir -p /data /config && chown -R 1000:1000 /data /config /srv
 
 VOLUME ["/data", "/config"]
 
